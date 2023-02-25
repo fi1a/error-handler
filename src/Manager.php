@@ -25,6 +25,11 @@ class Manager implements ManagerInterface
     /**
      * @var bool
      */
+    protected $handled = false;
+
+    /**
+     * @var bool
+     */
     protected $isRegister = false;
 
     public function __construct()
@@ -104,6 +109,11 @@ class Manager implements ManagerInterface
      */
     public function handleException(Throwable $exception): void
     {
+        if ($this->handled) {
+            return;
+        }
+
+        $this->handled = true;
         $inspector = new ExceptionInspector($exception);
 
         /** @var HandlerInterface $handler */
@@ -163,6 +173,6 @@ class Manager implements ManagerInterface
      */
     protected function terminate(): void
     {
-        exit(1);
+        exit(0);
     }
 }
