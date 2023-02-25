@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fi1a\ErrorHandler;
 
+use ErrorException;
 use Throwable;
 
 use const PHP_EOL;
@@ -51,7 +52,7 @@ class ExceptionInspector implements InspectorInterface
     public function getCode(): string
     {
         $code = $this->exception->getCode();
-        if ($this->exception instanceof \ErrorException) {
+        if ($this->exception instanceof ErrorException) {
             $constants = get_defined_constants(true);
             if (array_key_exists('Core', $constants)) {
                 foreach ($constants['Core'] as $constant => $value) {

@@ -55,4 +55,16 @@ interface ManagerInterface
      * Обработать исключение
      */
     public function handleException(Throwable $exception): void;
+
+    /**
+     * Обработать ошибку
+     *
+     * @param mixed[] $context
+     */
+    public function handleError(int $number, string $message, string $file, int $line): bool;
+
+    /**
+     * Метод выполняемый по завершению работы скрипта
+     */
+    public function handleShutdown(): void;
 }

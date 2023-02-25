@@ -11,6 +11,9 @@ use Fi1a\ErrorHandler\ManagerInterface;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
+use const E_COMPILE_ERROR;
+use const E_NOTICE;
+
 /**
  * Менеджер
  *
@@ -70,5 +73,108 @@ class ManagerTest extends TestCase
 
         $manager->handleException(new InvalidArgumentException());
         ob_clean();
+    }
+
+    /**
+     * Обработка ошибки
+     */
+    public function testHandleError(): void
+    {
+        $manager = $this->getMockBuilder(Manager::class)
+            ->onlyMethods(['terminate'])
+            ->getMock();
+
+        $manager->expects($this->once())->method('terminate');
+
+        ob_start();
+        $manager->pushHandler(new PrettyPageHandler());
+
+        $manager->handleError(E_COMPILE_ERROR, 'Message', __FILE__, 86);
+        ob_clean();
+    }
+
+    /**
+     * Обработка ошибки
+     */
+    public function testHandleErrorLevel(): void
+    {
+        $errorReporting = error_reporting();
+        error_reporting(E_NOTICE);
+        $manager = $this->getMockBuilder(Manager::class)
+            ->onlyMethods(['terminate'])
+            ->getMock();
+
+        $manager->expects($this->never())->method('terminate');
+
+        $manager->pushHandler(new PrettyPageHandler());
+
+        $manager->handleError(E_COMPILE_ERROR, 'Message', __FILE__, 86);
+
+        error_reporting($errorReporting);
+    }
+
+    /**
+     * Обработка ошибки
+     */
+    public function testHandleErrorDisabled(): void
+    {
+        $errorReporting = error_reporting();
+        error_reporting(0);
+        $manager = $this->getMockBuilder(Manager::class)
+            ->onlyMethods(['terminate'])
+            ->getMock();
+
+        $manager->expects($this->never())->method('terminate');
+
+        $manager->pushHandler(new PrettyPageHandler());
+
+        $manager->handleError(E_COMPILE_ERROR, 'Message', __FILE__, 86);
+
+        error_reporting($errorReporting);
+    }
+
+    /**
+     * Метод выполняемый по завершению работы скрипта
+     */
+    public function testHandleShutdown(): void
+    {
+        $manager = $this->getMockBuilder(Manager::class)
+            ->onlyMethods(['terminate', 'getLastError'])
+            ->getMock();
+
+        $manager->expects($this->once())->method('terminate');
+        $manager->expects($this->once())
+            ->method('getLastError')
+            ->willReturn([
+                'type' => E_NOTICE,
+                'message' => 'message',
+                'file' => __FILE__,
+                'line' => 149,
+            ]);
+
+        ob_start();
+        $manager->pushHandler(new PrettyPageHandler());
+
+        $manager->handleShutdown();
+        ob_clean();
+    }
+
+    /**
+     * Метод выполняемый по завершению работы скрипта
+     */
+    public function testHandleShutdownEmptyError(): void
+    {
+        $manager = $this->getMockBuilder(Manager::class)
+            ->onlyMethods(['terminate', 'getLastError'])
+            ->getMock();
+
+        $manager->expects($this->never())->method('terminate');
+        $manager->expects($this->once())
+            ->method('getLastError')
+            ->willReturn(null);
+
+        $manager->pushHandler(new PrettyPageHandler());
+
+        $manager->handleShutdown();
     }
 }
