@@ -140,10 +140,12 @@ class ExceptionInspector implements InspectorInterface
 
         $start = 1;
         $code = '';
-        if ($item['file'] && is_file($item['file'])) {
-            $start = (int) $item['line'] - $this->countLineOfCode;
-            if ($start <= 0) {
-                $start = 1;
+        if (isset($item['file']) && $item['file'] && is_file($item['file'])) {
+            if (isset($item['line'])) {
+                $start = $item['line'] - $this->countLineOfCode;
+                if ($start <= 0) {
+                    $start = 1;
+                }
             }
             $code = file_get_contents($item['file']);
             $code = implode(PHP_EOL, array_slice(explode(PHP_EOL, $code), $start, 2 * $this->countLineOfCode));
@@ -151,8 +153,8 @@ class ExceptionInspector implements InspectorInterface
 
         return [
             'name' => $name,
-            'file' => $item['file'],
-            'line' => (int) $item['line'],
+            'file' => $item['file'] ?? '',
+            'line' => $item['line'] ?? 0,
             'start' => $start + 1,
             'code' => $code,
         ];
