@@ -109,7 +109,7 @@ class Manager implements ManagerInterface
      */
     public function handleException(Throwable $exception): void
     {
-        if ($this->handled) {
+        if (!$this->canHandle()) {
             return;
         }
 
@@ -129,10 +129,7 @@ class Manager implements ManagerInterface
      */
     public function handleError(int $number, string $message, string $file, int $line): bool
     {
-        if (error_reporting() === 0) {
-            return false;
-        }
-        if (!(error_reporting() & $number)) {
+        if ((!$this->canHandle() && error_reporting() === 0) || !(error_reporting() & $number)) {
             return false;
         }
 
@@ -146,6 +143,10 @@ class Manager implements ManagerInterface
      */
     public function handleShutdown(): void
     {
+        if (!$this->canHandle()) {
+            return;
+        }
+
         $error = $this->getLastError();
         if (!isset($error)) {
             return;
@@ -173,6 +174,14 @@ class Manager implements ManagerInterface
      */
     protected function terminate(): void
     {
-        exit(0);
+        exit(1);
+    }
+
+    /**
+     * Возможно ли обработать ошибку или исключение
+     */
+    protected function canHandle(): bool
+    {
+        return !$this->handled;
     }
 }

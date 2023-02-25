@@ -72,6 +72,7 @@ class ManagerTest extends TestCase
         $manager->pushHandler(new PrettyPageHandler());
 
         $manager->handleException(new InvalidArgumentException());
+        $manager->handleException(new InvalidArgumentException());
         ob_clean();
     }
 
@@ -89,6 +90,7 @@ class ManagerTest extends TestCase
         ob_start();
         $manager->pushHandler(new PrettyPageHandler());
 
+        $manager->handleError(E_COMPILE_ERROR, 'Message', __FILE__, 86);
         $manager->handleError(E_COMPILE_ERROR, 'Message', __FILE__, 86);
         ob_clean();
     }
@@ -155,6 +157,7 @@ class ManagerTest extends TestCase
         ob_start();
         $manager->pushHandler(new PrettyPageHandler());
 
+        $manager->handleShutdown();
         $manager->handleShutdown();
         ob_clean();
     }
