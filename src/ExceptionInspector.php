@@ -147,6 +147,7 @@ class ExceptionInspector implements InspectorInterface
                     $start = 1;
                 }
             }
+
             $code = file_get_contents($item['file']);
             $code = implode(PHP_EOL, array_slice(explode(PHP_EOL, $code), $start, 2 * $this->countLineOfCode));
         }
