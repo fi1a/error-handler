@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace Fi1a\Unit\ErrorHandler\Handlers;
 
-use Fi1a\ErrorHandler\ExceptionInspector;
 use Fi1a\ErrorHandler\Handlers\PrettyPageHandler;
-use Fi1a\ErrorHandler\InspectorInterface;
 use Fi1a\Http\Http;
-use InvalidArgumentException;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Html обработчик
@@ -17,13 +13,8 @@ use PHPUnit\Framework\TestCase;
  * @runTestsInSeparateProcesses
  * @preserveGlobalState disabled
  */
-class PrettyPageHandlerTest extends TestCase
+class PrettyPageHandlerTest extends HandlerTestCase
 {
-    protected function getExceptionInspector(): InspectorInterface
-    {
-        return new ExceptionInspector(new InvalidArgumentException('Message', 100, new InvalidArgumentException()));
-    }
-
     /**
      * Обработчик
      */

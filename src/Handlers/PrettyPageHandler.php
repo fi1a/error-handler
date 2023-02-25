@@ -39,7 +39,9 @@ class PrettyPageHandler implements HandlerInterface
     public function handle(InspectorInterface $inspector): void
     {
         $this->sendResponse();
-        $this->includeTemplate($inspector, $this->getInfo());
+        if ((int) ini_get('display_errors') === 1) {
+            $this->includeTemplate($inspector, $this->getInfo());
+        }
     }
 
     /**
@@ -62,7 +64,7 @@ class PrettyPageHandler implements HandlerInterface
         InspectorInterface $inspector,
         array $info
     ): void {
-        require __DIR__ . '/../../resources/pretty.php';
+        require __DIR__ . '/../../resources/pretty-page/pretty.php';
     }
 
     /**
