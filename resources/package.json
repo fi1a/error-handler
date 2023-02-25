@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@node-minify/core": "^8.0.5",
+    "@node-minify/csso": "^8.0.5",
+    "@node-minify/uglify-js": "^8.0.5"
+  }
+}

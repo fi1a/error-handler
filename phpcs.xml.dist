@@ -82,7 +82,6 @@
                 <!-- Forbid remaining debug functions in the code -->
                 <element key="d" value="null"/>
                 <element key="dd" value="null"/>
-                <element key="dump" value="null"/>
                 <element key="dump_d" value="null"/>
                 <element key="var_dump" value="null"/>
             </property>
@@ -375,7 +374,7 @@
     <rule ref="SlevomatCodingStandard.TypeHints.UselessConstantTypeHint"/>
 
     <!-- Disallow use of super-global variables -->
-    <rule ref="SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable"/>
+    <!--<rule ref="SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable"/>-->
 
     <!-- Clean up unnecessary variables -->
     <rule ref="SlevomatCodingStandard.Variables.UselessVariable"/>
@@ -394,7 +393,7 @@
     <rule ref="Squiz.Operators.ValidLogicalOperators"/>
 
     <!-- Forbid global functions -->
-    <rule ref="Squiz.Functions.GlobalFunction"/>
+    <!--<rule ref="Squiz.Functions.GlobalFunction"/>-->
 
     <!-- Forbid 'global' -->
     <rule ref="Squiz.PHP.GlobalKeyword"/>
