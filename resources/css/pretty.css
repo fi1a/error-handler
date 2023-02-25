@@ -1,0 +1,175 @@
+:root {
+    --background-first: #eeeeee;
+    --background-second: #2d2d2d;
+    --background-third: #ffffff;
+    --background-fifth: #000000;
+
+    --foreground-first: #ffffff;
+    --foreground-second: #f08d49;
+    --foreground-third: #a29d9d;
+    --foreground-fifth: #000000;
+
+    --color-active: #4288CE;
+}
+
+body, html {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: var(--background-first);
+    font: 13px "Helvetica Neue", helvetica, arial, sans-serif;
+}
+
+.header {
+    background: var(--background-second);
+    padding: 30px 40px 10px 40px;
+    margin-bottom: 20px;
+}
+
+.header .message {
+    color: var(--foreground-first);
+    font-size: 28px;
+    word-wrap: break-word;
+}
+
+.header .name {
+    color: var(--foreground-second);
+    font-size: 16px;
+}
+
+.header .name .code {
+    color: var(--foreground-third);
+}
+
+.previous {
+    background: var(--background-second);
+    padding: 20px 40px;
+    margin-bottom: 20px;
+}
+
+.previous h2 {
+    color: var(--foreground-second);
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.previous ol {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline-start: 15px;
+}
+
+.previous ol li {
+    color: var(--foreground-first);
+    margin-bottom: 10px;
+}
+
+.previous .name {
+    color: var(--foreground-second);
+}
+
+.previous .code {
+    color: var(--foreground-third);
+}
+
+.previous .message {
+    color: var(--foreground-first);
+}
+
+.backtrace {
+    padding: 0 10px;
+    margin-bottom: 20px;
+}
+
+.backtrace .backtrace-item {
+    background: var(--background-third);
+    padding: 20px;
+    border-bottom: 1px solid var(--background-first);
+    border-left: 5px solid transparent;
+    cursor: pointer;
+}
+
+.backtrace .backtrace-item .code {
+    display: none;
+    margin-top: 20px;
+}
+
+.backtrace .backtrace-item.active {
+    border-left: 5px solid var(--color-active);
+}
+
+.backtrace .backtrace-item.active .code {
+    display: block;
+}
+
+.backtrace .backtrace-item .number {
+    font-size: 11px;
+    background: rgba(0, 0, 0, .05);
+    color: var(--foreground-third);
+    display: inline-block;
+    min-width: 10px;
+    text-align: center;
+    height: 18px;
+    width: 18px;
+    line-height: 18px;
+    border-radius: 5px;
+    padding: 0 1px 0 1px;
+    margin-right: 5px;
+}
+
+.backtrace .backtrace-item .name {
+    display: inline-block;
+    font-size: 16px;
+    color: var(--foreground-fifth);
+}
+
+.backtrace .backtrace-item.active .name {
+    color: var(--color-active);
+}
+
+.backtrace .backtrace-item .file {
+    font-size: 16px;
+    color: var(--foreground-third);
+}
+
+.backtrace .backtrace-item .file .line {
+    font-weight: bold;
+}
+
+.backtrace .backtrace-item .backtrace-header {
+    margin-bottom: 10px;
+}
+
+.details {
+    background: var(--background-third);
+    padding: 20px 35px;
+}
+
+.details h2 {
+    margin-bottom: 30px;
+}
+
+.details h3 {
+    margin-bottom: 15px;
+}
+
+.details .block {
+    margin-bottom: 25px;
+}
+
+.details .block .empty {
+    font-style: italic;
+}
+
+.details .block .key {
+    font-weight: bold;
+}
+
+.details .block .line {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
