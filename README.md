@@ -7,7 +7,7 @@
 [![Total Downloads][badge-downloads]][downloads]
 [![Support mail][badge-mail]][mail]
 
-Пакет предоставляет обработчики отображения ошибок в том числе с симпатичным интрефейсом. Он помогает отлаживать код при
+Пакет предоставляет обработчики отображения ошибок, в том числе с симпатичным интрефейсом. Он помогает отлаживать код при
 реализации вашего веб-проекта.
 
 Обработчик ошибок с симпатичным интрефейсом:
@@ -42,7 +42,7 @@ $manager->pushHandler(new PrettyPageHandler())
 
 Доступные обработчики:
 
-- `Fi1a\ErrorHandler\Handlers\PrettyPageHandler` - обработчик симпатичным интерфейсом;
+- `Fi1a\ErrorHandler\Handlers\PrettyPageHandler` - обработчик с симпатичным интерфейсом;
 - `Fi1a\ErrorHandler\Handlers\ConsoleHandler` - обработчик вывода в консоль.
 
 [badge-release]: https://img.shields.io/packagist/v/fi1a/error-handler?label=release
