@@ -1,4 +1,8 @@
 (function () {
+    function callFunction(func) {
+        func();
+    }
+
     function toggle(event) {
         let container = this;
 
@@ -12,6 +16,8 @@
 
         if(!container.classList.contains('active')) {
             container.classList.add('active');
+
+            Prism.plugins.lineHighlight.highlightLines(container.querySelector('.code'))();
 
             return;
         }
